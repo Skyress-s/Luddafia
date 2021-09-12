@@ -11,8 +11,10 @@ class Player
 public:
 	Player();
 	~Player();
-
 	bool isAlive = true;
+	int number = -1;
+
+	
 
 private:
 
@@ -31,6 +33,13 @@ class Mafia : public Player
 public:
 	Mafia();
 	~Mafia();
+	void TryToKill(Player p) {
+		p.isAlive = false;
+		p.number = 10;
+		cout << p.number << endl;
+		cout << "Hello world!" << endl;
+
+	}
 
 private:
 
@@ -47,6 +56,20 @@ Mafia::~Mafia()
 
 
 int main() {
+
+
+
+	Mafia maf{};
+
+	Player per{};
+	
+	maf.TryToKill(per);
+
+	cout << per.isAlive << " | num : " << per.number << endl;
+	cout << maf.isAlive << " | num : " << maf.number << endl;
+
+
+	return 0;
 	//the name of the players
 	vector<string> names{};
 
@@ -67,7 +90,6 @@ int main() {
 		}
 
 		names.push_back(answer);
-
 	}
 
 
@@ -84,7 +106,7 @@ int main() {
 
 
 
-
+	
 
 	//debug print
 	for (int i = 0; i < names.size(); i++)
