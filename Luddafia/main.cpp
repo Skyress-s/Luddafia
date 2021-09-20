@@ -97,8 +97,8 @@ int main() {
 		personsPerMafia = names.size();
 	}
 
-	int n = floor((float(names.size()) / (personsPerMafia + 1)));
-	cout << "Num of mafias : " << n << endl;
+	int numOfMafias = floor((float(names.size()) / (personsPerMafia + 1)));
+	cout << "Num of mafias : " << numOfMafias << endl;
 
 	//debug print
 	for (int i = 0; i < names.size(); i++)
@@ -107,8 +107,31 @@ int main() {
 	}
 
 
-	//assign the mafias and player
-	cout << GetRandomNum(0, names.size());
+	//assign the mafias and players
+	
+	//generate indexes for random slots
+	vector<int> indexes{};
+
+	vector<int> larr{};
+	for (int i = 0; i < names.size(); i++)
+	{
+		larr.push_back(i);
+	}
+
+	for (int i = 0; i < numOfMafias; i++)
+	{
+		int n = GetRandomNum(0, larr.size() - 1 - i);
+		indexes.push_back(larr[n]);
+		larr.erase(larr.begin() + n);
+	}
+
+	cout << endl <<endl;
+	for (int i = 0; i < indexes.size(); i++)
+	{
+		cout << indexes[i] << endl;
+	}
+
+
 }
 
 
