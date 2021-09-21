@@ -24,9 +24,12 @@ public:
 	Player();
 	~Player();
 
+	string name{};
 	bool isAlive{true};
 	bool isProtected{ false };
-
+	string GetType() {
+		return "Player";
+	}
 	
 
 private:
@@ -51,12 +54,16 @@ public:
 		}
 
 	}
+	string GetType() {
+		return "Mafia";
+	}
 
 private:
 
 };
 Mafia::Mafia()
 {
+
 }
 Mafia::~Mafia()
 {
@@ -85,6 +92,11 @@ Paladin::~Paladin()
 
 
 int main() {
+	
+	
+
+
+
 	//the name of the players
 	vector<string> names{};
 	GetPlayerNames(names);
@@ -100,18 +112,13 @@ int main() {
 	int numOfMafias = floor((float(names.size()) / (personsPerMafia + 1)));
 	cout << "Num of mafias : " << numOfMafias << endl;
 
-	//debug print
-	for (int i = 0; i < names.size(); i++)
-	{
-		cout << names[i] << endl;
-	}
-
 
 	//assign the mafias and players
 	
 	//generate indexes for random slots
 	vector<int> indexes{};
 
+	// make random array
 	vector<int> larr{};
 	for (int i = 0; i < names.size(); i++)
 	{
@@ -130,6 +137,59 @@ int main() {
 	{
 		cout << indexes[i] << endl;
 	}
+	
+	//assign them mafias and players
+
+
+	vector<char> charAssi(names.size(), 'h'); // h for human
+
+	for (int i = 0; i < indexes.size(); i++)
+	{
+		charAssi[indexes[i]] = 'm';
+	}
+
+
+	cout << endl << endl;
+	for (int i = 0; i < charAssi.size(); i++)
+	{
+		cout << charAssi[i] << endl;
+	}
+
+			
+	vector<Player> players{};
+	vector<Mafia> mafias{};
+	for (int i = 0; i < names.size(); i++)
+	{
+		switch (charAssi[i])
+		{
+		case 'h':
+			
+			players.push_back(Player{});
+			break;
+
+		case 'm':
+			mafias.push_back(Mafia{});
+			
+			
+			break;
+
+		default:
+			players.push_back(Player{});
+			break;
+		}
+	}
+
+
+	//debug display players
+	for (int i = 0; i < players.size(); i++)
+	{
+		cout << players[i].GetType() << " | " << players[i].name << endl;
+	}
+	for (int i = 0; i < mafias.size(); i++)
+	{
+		cout << mafias[i].GetType() << " | " << mafias[i].name << endl;
+	}
+
 
 
 }
@@ -140,7 +200,7 @@ void GetPlayerNames(vector<string>& names) {
 	while (accepted == false)
 	{
 		string answer{};
-		cout << " Please input name / 'q' to exit loop : ";
+		cout << " q - finished / input player " << names.size() + 1 << " : ";
 		getline(cin, answer);
 		//cin >> answer; // 
 		//CinClear();  //why cant i have this ? ? ? !? !? !? !?
