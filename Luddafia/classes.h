@@ -82,6 +82,12 @@ namespace test {
 		vector<Player> humans{};
 		vector<Mafia> mafias{};
 
+		vector<string> GetallNames() {
+			for (int i = 0; i < hu; i++) {
+
+			}
+		}
+
 	private:
 
 	};

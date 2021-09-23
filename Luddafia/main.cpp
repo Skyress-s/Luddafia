@@ -58,9 +58,8 @@ vector<string> MixNameVector(vector<string> a_names) {
 }
 
 int main() {
-	
-	
 
+	
 	//the name of the players
 	vector<string> names{};
 	GetPlayerNames(names);
@@ -149,11 +148,45 @@ void GetPlayerNames(vector<string>& names) {
 	}
 }
 
+void Day() {
+	//implement timer func
+	char ans{};
+	cout << "Vote player out? y/n : ";
+	cin >> ans;
+	if (tolower(ans) == 'y') {
+		Vote();
+	}
+
+	system("pause");
+
+}
+
+void Vote() {
+	string ans{};
+	cout << "Choose player : ";
+	cin >> ans;
+
+	for (size_t i = 0; i < length; i++) {
+
+	}
+
+}
+
+void Night() {
+	
+}
+
+
 void MainGameLoop(AllPlayers a_allPlayers) {
 	system("cls");
 	bool finishedMainLoop = false;
 	while (finishedMainLoop == false) {
 
+		Day();
+
+		Vote();
+
+		Night();
 	}
 }
 
