@@ -59,7 +59,10 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 int main() {
 
-	
+
+
+
+
 	//the name of the players
 	vector<string> names{};
 	GetPlayerNames(names);
@@ -87,43 +90,57 @@ int main() {
 
 
 	//assign the mafias and players
-
-
-	AllPlayers allPlayers{};
-	int NAI{}; //Name Assign Index
-
-
-	for (int i = 0; i < numOfMafias; i++) {
-		Mafia temp{};
-		temp.name = names[NAI];
-		allPlayers.mafias.push_back(temp);
-		NAI++;
-	}
-
-	int rest = names.size() - numOfMafias;
-	for (int i = 0; i < rest; i++) {
-		Player temp{};
-		temp.name = names[NAI];
-		allPlayers.humans.push_back(temp);
-		NAI++;
-	}
-			
+	Mafia maf1{};
+	Human hum1{};
 	
+
+	vector<std::unique_ptr<Player>> allPlayers{};
+
+	allPlayers.push_back(std::unique_ptr<Player>(new Human()));
+	allPlayers.push_back(std::unique_ptr<Player>(new Mafia()));
+
+	cout << allPlayers[1]->GetType() << endl;
+	cout << allPlayers[0]->GetType() << endl;
 	
 
 
-	//debug display players
-	for (int i = 0; i < allPlayers.mafias.size(); i++)
-	{
-		cout << allPlayers.mafias[i].GetType() << "   | " << allPlayers.mafias[i].name << endl;
-	}
-	for (int i = 0; i < allPlayers.humans.size(); i++)
-	{
-		cout << allPlayers.humans[i].GetType() << " | " << allPlayers.humans[i].name << endl;
-	}
-
-	MainGameLoop(allPlayers);
 	return 0;
+
+	//AllPlayers allPlayers{};
+	//int NAI{}; //Name Assign Index
+
+
+	//for (int i = 0; i < numOfMafias; i++) {
+	//	Mafia temp{};
+	//	temp.name = names[NAI];
+	//	allPlayers.mafias.push_back(temp);
+	//	NAI++;
+	//}
+
+	//int rest = names.size() - numOfMafias;
+	//for (int i = 0; i < rest; i++) {
+	//	Player temp{};
+	//	temp.name = names[NAI];
+	//	allPlayers.humans.push_back(temp);
+	//	NAI++;
+	//}
+	//		
+	//
+	//
+
+
+	////debug display players
+	//for (int i = 0; i < allPlayers.mafias.size(); i++)
+	//{
+	//	cout << allPlayers.mafias[i].GetType() << "   | " << allPlayers.mafias[i].name << endl;
+	//}
+	//for (int i = 0; i < allPlayers.humans.size(); i++)
+	//{
+	//	cout << allPlayers.humans[i].GetType() << " | " << allPlayers.humans[i].name << endl;
+	//}
+
+	//MainGameLoop(allPlayers);
+	//return 0;
 }
 
 
@@ -148,47 +165,7 @@ void GetPlayerNames(vector<string>& names) {
 	}
 }
 
-void Day() {
-	//implement timer func
-	char ans{};
-	cout << "Vote player out? y/n : ";
-	cin >> ans;
-	if (tolower(ans) == 'y') {
-		Vote();
-	}
 
-	system("pause");
-
-}
-
-void Vote() {
-	string ans{};
-	cout << "Choose player : ";
-	cin >> ans;
-
-	for (size_t i = 0; i < length; i++) {
-
-	}
-
-}
-
-void Night() {
-	
-}
-
-
-void MainGameLoop(AllPlayers a_allPlayers) {
-	system("cls");
-	bool finishedMainLoop = false;
-	while (finishedMainLoop == false) {
-
-		Day();
-
-		Vote();
-
-		Night();
-	}
-}
 
 void CinClear() {
 	std::cin.clear(); // clears the cin buffer for errors

@@ -22,14 +22,32 @@ namespace test {
 		string GetType() {
 			return "Player";
 		}
-
-
 	private:
 
 	};
 	Player::Player() {
 	}
 	Player::~Player() {
+	}
+
+	class Human : public Player{
+	public:
+		Human();
+		~Human();
+
+		//using Player::GetType;
+		string GetType() {
+			return "Human";
+		}
+
+	private:
+
+	};
+
+	Human::Human() {
+	}
+
+	Human::~Human() {
 	}
 
 	class Mafia : public Player {
@@ -56,7 +74,7 @@ namespace test {
 	Mafia::~Mafia() {
 	}
 
-	class Paladin {
+	class Paladin : public Player{
 	public:
 		Paladin();
 		~Paladin();
@@ -83,9 +101,17 @@ namespace test {
 		vector<Mafia> mafias{};
 
 		vector<string> GetallNames() {
-			for (int i = 0; i < hu; i++) {
+			vector<string> names{};
 
+			for (int i = 0; i < humans.size(); i++) {
+				names.push_back(humans[i].name);
 			}
+			for (int i = 0; i < mafias.size(); i++) {
+				names.push_back(mafias[i].name);
+			}
+
+			return names;
+
 		}
 
 	private:
