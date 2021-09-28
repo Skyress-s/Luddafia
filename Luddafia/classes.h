@@ -19,7 +19,8 @@ namespace test {
 		string name{};
 		bool isAlive{ true };
 		bool isProtected{ false };
-		string GetType() {
+
+		virtual string GetType() {
 			return "Player";
 		}
 	private:
@@ -36,17 +37,15 @@ namespace test {
 		~Human();
 
 		//using Player::GetType;
-		string GetType() {
+		string GetType() final override { // final if none other inheritd/
 			return "Human";
 		}
 
 	private:
 
 	};
-
 	Human::Human() {
 	}
-
 	Human::~Human() {
 	}
 
@@ -59,9 +58,8 @@ namespace test {
 			if (!p.isProtected) {
 				p.isAlive = false;
 			}
-
 		}
-		string GetType() {
+		string GetType() override {
 			return "Mafia";
 		}
 
@@ -81,7 +79,9 @@ namespace test {
 		void Protect(Player& p) {
 			p.isProtected = true;
 		}
-
+		string GetType() override {
+			return "Paladin";
+		}
 
 	private:
 
