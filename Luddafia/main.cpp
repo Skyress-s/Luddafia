@@ -3,9 +3,13 @@
 #include <vector>
 #include <random>
 #include <ctime>
-#include "classes.h"
 
-using namespace test;
+#include "Player.h"
+#include "Human.h"
+#include "Mafia.h"
+#include "Paladin.h"
+
+//using namespace test;
 
 using std::cout;
 using std::endl;
@@ -18,7 +22,6 @@ std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)
 
 void GetPlayerNames(vector<string>&);
 void CinClear();
-void MainGameLoop(AllPlayers);
 
 
 int GetRandomNum(int, int);
@@ -59,19 +62,19 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 int main() {
 
-	vector<Player*> players{};
-	players.push_back(new Mafia{});
-	players.push_back(new Paladin{});
-	players.push_back(new Human{});
+	//vector<Player*> players{};
+	//players.push_back(new Mafia{});
+	//players.push_back(new Paladin{});
+	//players.push_back(new Human{});
 
-	for (int i = 0;  i < players.size(); i++) {
-		cout << players[i]->GetType() << endl;
-		/*Mafia* mafia = dynamic_cast<Mafia*>(players[i]);
-		if (mafia)
-			mafia->TryToKill();*/
-	}
+	//for (int i = 0;  i < players.size(); i++) {
+	//	cout << players[i]->GetType() << endl;
+	//	/*Mafia* mafia = dynamic_cast<Mafia*>(players[i]);
+	//	if (mafia)
+	//		mafia->TryToKill();*/
+	//}
 
-	return 0;
+	//return 0;
 
 	//the name of the players
 	vector<string> names{};
@@ -100,57 +103,35 @@ int main() {
 
 
 	//assign the mafias and players
-	Mafia maf1{};
-	Human hum1{};
+	
+	vector<Player*> players{};
+
+
+
+	for (int i = 0; i < names.size(); i++) {
+		if (i < numOfMafias) {
+			Mafia *temp = new Mafia{};
+			temp->name = names[i];
+			players.push_back(temp);
+		}
+		else {
+			Human* temp = new Human{};
+			temp->name = names[i];
+			players.push_back(temp);
+		}
+	}
+
+
+	for (int i = 0; i < players.size(); i++) {
+		cout << players[i]->GetType() << "  | name : " << players[i]->name << endl;
+	}
 	
 
-	vector<std::unique_ptr<Player>> allPlayers{};
-
-	allPlayers.push_back(std::unique_ptr<Player>(new Human()));
-	allPlayers.push_back(std::unique_ptr<Player>(new Mafia()));
-
-	cout << allPlayers[1]->GetType() << endl;
-	cout << allPlayers[0]->GetType() << endl;
+	
 	
 
 
 	return 0;
-
-	//AllPlayers allPlayers{};
-	//int NAI{}; //Name Assign Index
-
-
-	//for (int i = 0; i < numOfMafias; i++) {
-	//	Mafia temp{};
-	//	temp.name = names[NAI];
-	//	allPlayers.mafias.push_back(temp);
-	//	NAI++;
-	//}
-
-	//int rest = names.size() - numOfMafias;
-	//for (int i = 0; i < rest; i++) {
-	//	Player temp{};
-	//	temp.name = names[NAI];
-	//	allPlayers.humans.push_back(temp);
-	//	NAI++;
-	//}
-	//		
-	//
-	//
-
-
-	////debug display players
-	//for (int i = 0; i < allPlayers.mafias.size(); i++)
-	//{
-	//	cout << allPlayers.mafias[i].GetType() << "   | " << allPlayers.mafias[i].name << endl;
-	//}
-	//for (int i = 0; i < allPlayers.humans.size(); i++)
-	//{
-	//	cout << allPlayers.humans[i].GetType() << " | " << allPlayers.humans[i].name << endl;
-	//}
-
-	//MainGameLoop(allPlayers);
-	//return 0;
 }
 
 
@@ -174,8 +155,6 @@ void GetPlayerNames(vector<string>& names) {
 		names.push_back(answer);
 	}
 }
-
-
 
 void CinClear() {
 	std::cin.clear(); // clears the cin buffer for errors

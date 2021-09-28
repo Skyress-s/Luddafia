@@ -13,8 +13,8 @@ namespace test {
 
 	class Player {
 	public:
-		Player();
-		~Player();
+		Player() {}
+		~Player(){}
 
 		string name{};
 		bool isAlive{ true };
@@ -26,10 +26,7 @@ namespace test {
 	private:
 
 	};
-	Player::Player() {
-	}
-	Player::~Player() {
-	}
+
 
 	class Human : public Player{
 	public:
@@ -92,37 +89,6 @@ namespace test {
 	}
 
 
-	class AllPlayers {
-	public:
-		AllPlayers();
-		~AllPlayers();
-
-		vector<Player> humans{};
-		vector<Mafia> mafias{};
-
-		vector<string> GetallNames() {
-			vector<string> names{};
-
-			for (int i = 0; i < humans.size(); i++) {
-				names.push_back(humans[i].name);
-			}
-			for (int i = 0; i < mafias.size(); i++) {
-				names.push_back(mafias[i].name);
-			}
-
-			return names;
-
-		}
-
-	private:
-
-	};
-
-	AllPlayers::AllPlayers() {
-	}
-
-	AllPlayers::~AllPlayers() {
-	}
-
+	
 
 }
