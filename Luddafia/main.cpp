@@ -20,7 +20,6 @@ using std::vector;
 std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
 
 
-void GetPlayerNames(vector<string>&);
 void CinClear();
 
 
@@ -48,7 +47,6 @@ vector<int> CreateRandomIndexArray(int size) {
 
 	return mixedIndexes;
 }
-
 vector<string> MixNameVector(vector<string> a_names) {
 
 	vector<int> mixedIndexes = CreateRandomIndexArray(a_names.size());
@@ -59,6 +57,11 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 	return result;
 }
+
+
+void GetPlayerNames(vector<string>&);
+void MainGameLoop(vector<Player*>);
+
 
 int main() {
 
@@ -105,12 +108,16 @@ int main() {
 	//assign the mafias and players
 	
 	vector<Player*> players{};
-
-
+	
 
 	for (int i = 0; i < names.size(); i++) {
 		if (i < numOfMafias) {
 			Mafia *temp = new Mafia{};
+			temp->name = names[i];
+			players.push_back(temp);
+		}
+		else if (i < 1 + numOfMafias) {
+			Paladin* temp = new Paladin{};
 			temp->name = names[i];
 			players.push_back(temp);
 		}
@@ -122,12 +129,9 @@ int main() {
 	}
 
 
-	for (int i = 0; i < players.size(); i++) {
-		cout << players[i]->GetType() << "  | name : " << players[i]->name << endl;
-	}
 	
 
-	
+	MainGameLoop(players);
 	
 
 
@@ -155,6 +159,32 @@ void GetPlayerNames(vector<string>& names) {
 		names.push_back(answer);
 	}
 }
+
+
+void MainGameLoop(vector<Player*> a_players) {
+	while (true) {
+
+		//actions
+		for (int i = 0; i < a_players.size(); i++) {
+			a_players[i]->Action(a_players);
+		}
+
+		//resolve actions
+		for (int i = 0; i < a_players.size(); i++) {
+			a_players[i]->ResolveActions();
+		}
+
+		//display status
+		for (int i = 0; i < a_players.size(); i++) {
+			cout << a_players[i]->GetType() << "  | name : " << a_players[i]->name << "  | alive? : " << a_players[i]->isAlive << endl;
+		}
+		system("pause");
+
+		//reset relevant variables
+
+	}
+}
+
 
 void CinClear() {
 	std::cin.clear(); // clears the cin buffer for errors

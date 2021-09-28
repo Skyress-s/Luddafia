@@ -7,6 +7,6 @@ public:
 	Mafia() {}
 
 	std::string GetType() override;
-	void Action() override;
+	void Action(vector<Player*>) override;
 };
 
