@@ -15,8 +15,10 @@ void Player::ResolveActions() {
 	else if (attemptedMurder == true && isProtected == false) {
 		isAlive = false;
 	}
+}
 
-
+void Player::ResentRelevantVariables() {
+	isProtected = false;
 
 }
 

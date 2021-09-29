@@ -174,13 +174,26 @@ void MainGameLoop(vector<Player*> a_players) {
 			a_players[i]->ResolveActions();
 		}
 
+		
+
+		//reset relevant variables
+
+		for (int i = 0; i < a_players.size(); i++) {
+			a_players[i]->ResentRelevantVariables();
+		}
+
+		// Remove dead players
+		for (size_t i = 0; i < a_players.size(); i++) {
+			if (!a_players[i]->isAlive) {
+				a_players.erase(a_players.begin() + i);
+			}
+		}
+
 		//display status
 		for (int i = 0; i < a_players.size(); i++) {
 			cout << a_players[i]->GetType() << "  | name : " << a_players[i]->name << "  | alive? : " << a_players[i]->isAlive << endl;
 		}
 		system("pause");
-
-		//reset relevant variables
 
 	}
 }
