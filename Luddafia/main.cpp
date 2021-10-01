@@ -62,6 +62,7 @@ vector<string> MixNameVector(vector<string> a_names) {
 void GetPlayerNames(vector<string>&);
 void MainGameLoop(vector<Player*>);
 
+void DisplayPlayerStatuses(vector<Player*>);
 
 int main() {
 
@@ -158,6 +159,7 @@ void MainGameLoop(vector<Player*> a_players) {
 		//resolve actions
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResolveActions();
+			
 		}
 
 		
@@ -175,11 +177,8 @@ void MainGameLoop(vector<Player*> a_players) {
 			}
 		}
 
-		//display status
-		for (int i = 0; i < a_players.size(); i++) {
-			cout << a_players[i]->GetType() << "  | name : " << a_players[i]->name << "  | alive? : " << a_players[i]->isAlive << endl;
-		}
-		system("pause");
+		DisplayPlayerStatuses(a_players);
+		
 
 	}
 }
@@ -194,4 +193,20 @@ void CinClear() {
 int GetRandomNum(int from, int too) {
 	std::uniform_int_distribution<> die{ from, too };
 	return die(mersenne);
+}
+
+void Spacing(int space) {
+	for (int i = 0; i < space; i++) {
+		cout << ' ';
+	}
+}
+
+void DisplayPlayerStatuses(vector<Player*> a_players) {
+	system("cls");
+	for (int i = 0; i < a_players.size(); i++) {
+		cout << a_players[i]->GetType();
+		Spacing(a_players[i]->GetType().size());
+		cout << " | name : " << a_players[i]->name << " | alive ? : " << a_players[i]->isAlive << endl;
+	}
+	system("pause");
 }

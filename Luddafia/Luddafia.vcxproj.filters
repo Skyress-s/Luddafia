@@ -53,5 +53,8 @@
     <ClInclude Include="Paladin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FunctionsDecler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

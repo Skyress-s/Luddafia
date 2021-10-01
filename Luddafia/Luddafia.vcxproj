@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Class.h" />
     <ClInclude Include="classes.h" />
+    <ClInclude Include="FunctionsDecler.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Mafia.h" />
     <ClInclude Include="Paladin.h" />

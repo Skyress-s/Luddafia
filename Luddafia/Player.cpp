@@ -46,7 +46,7 @@ int Choice(vector<string> options, string activePlayer) {
 		switch (tolower(input)) {
 		case 'w':
 			if (currentChoice - 1 < 0) {
-				
+				currentChoice = options.size() - 1;
 				break;
 			}
 			currentChoice += -1;
@@ -54,6 +54,7 @@ int Choice(vector<string> options, string activePlayer) {
 
 		case 's':
 			if (currentChoice + 1 >= options.size()) {
+				currentChoice = 0;
 				break;
 			}
 			currentChoice += 1;
