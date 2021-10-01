@@ -162,13 +162,12 @@ void MainGameLoop(vector<Player*> a_players) {
 			
 		}
 
-		
-
 		//reset relevant variables
-
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResentRelevantVariables();
 		}
+
+		DisplayPlayerStatuses(a_players);
 
 		// Remove dead players
 		for (size_t i = 0; i < a_players.size(); i++) {
@@ -177,7 +176,7 @@ void MainGameLoop(vector<Player*> a_players) {
 			}
 		}
 
-		DisplayPlayerStatuses(a_players);
+		
 		
 
 	}
@@ -195,18 +194,33 @@ int GetRandomNum(int from, int too) {
 	return die(mersenne);
 }
 
-void Spacing(int space) {
+string Spacing(int space) {
+	string output{};
 	for (int i = 0; i < space; i++) {
-		cout << ' ';
+		output += " ";
+
 	}
+	//cout << output << "t" << endl;
+
+	return output;
 }
 
 void DisplayPlayerStatuses(vector<Player*> a_players) {
 	system("cls");
 	for (int i = 0; i < a_players.size(); i++) {
-		cout << a_players[i]->GetType();
-		Spacing(a_players[i]->GetType().size());
-		cout << " | name : " << a_players[i]->name << " | alive ? : " << a_players[i]->isAlive << endl;
+		string line{};
+		line += a_players[i]->GetType();
+		line += Spacing(12 - line.size());
+
+		line += a_players[i]->name;
+
+		line += Spacing(20 - line.size());
+
+		line += "Killed! : " + std::to_string(!a_players[i]->isAlive);
+
+		
+		
+		cout << line << endl;
 	}
 	system("pause");
 }

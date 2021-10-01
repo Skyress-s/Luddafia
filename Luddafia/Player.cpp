@@ -19,6 +19,7 @@ void Player::ResolveActions() {
 
 void Player::ResentRelevantVariables() {
 	isProtected = false;
+	attemptedMurder = false;
 
 }
 
