@@ -25,13 +25,13 @@ void Player::ResentRelevantVariables() {
 
 
 //some functions most of the subclasses use :)
-int Choice(vector<string> options, string activePlayer) {
+int Choice(vector<string> options, string title) {
 	int currentChoice{};
 
 	bool accAns{};
 	while (!accAns) {
 		system("cls");
-		cout << " | " << activePlayer << "'s action" << endl << endl;
+		cout << title<< endl << endl;
 		for (int i = 0; i < options.size(); i++) {
 			if (currentChoice == i) {
 				cout << " ->   ";

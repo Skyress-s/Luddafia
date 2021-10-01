@@ -19,9 +19,7 @@ using std::vector;
 
 std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
 
-
 void CinClear();
-
 
 int GetRandomNum(int, int);
 vector<int> CreateRandomIndexArray(int size) {
@@ -57,7 +55,6 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 	return result;
 }
-
 
 void GetPlayerNames(vector<string>&);
 void MainGameLoop(vector<Player*>);
@@ -149,7 +146,10 @@ void GetPlayerNames(vector<string>& names) {
 
 
 void MainGameLoop(vector<Player*> a_players) {
+
+	
 	while (true) {
+		//night ---------------------
 
 		//actions
 		for (int i = 0; i < a_players.size(); i++) {
@@ -176,10 +176,22 @@ void MainGameLoop(vector<Player*> a_players) {
 			}
 		}
 
-		
-		
+		//VOTE --------------------------------------
+		vector<string> names{};
+		for (int i = 0; i < a_players.size(); i++) {
+			names.push_back(a_players[i]->name);
+		}
+		names.push_back("No Consensus");
+
+		int act = Choice(names, "Whom to vote to the noose ? ");
+		if (act < names.size() - 1) {
+			a_players.erase(a_players.begin() + act);
+		}
+
 
 	}
+
+	
 }
 
 
