@@ -65,20 +65,6 @@ void MainGameLoop(vector<Player*>);
 
 int main() {
 
-	//vector<Player*> players{};
-	//players.push_back(new Mafia{});
-	//players.push_back(new Paladin{});
-	//players.push_back(new Human{});
-
-	//for (int i = 0;  i < players.size(); i++) {
-	//	cout << players[i]->GetType() << endl;
-	//	/*Mafia* mafia = dynamic_cast<Mafia*>(players[i]);
-	//	if (mafia)
-	//		mafia->TryToKill();*/
-	//}
-
-	//return 0;
-
 	//the name of the players
 	vector<string> names{};
 	GetPlayerNames(names);

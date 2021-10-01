@@ -46,6 +46,7 @@ int Choice(vector<string> options, string activePlayer) {
 		switch (tolower(input)) {
 		case 'w':
 			if (currentChoice - 1 < 0) {
+				
 				break;
 			}
 			currentChoice += -1;
