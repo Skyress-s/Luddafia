@@ -69,6 +69,7 @@ int main() {
 
 	//determines how many mafias
 
+	
 	int personsPerMafia = 3; // 3 manes three persons per ONE mafia
 	if (personsPerMafia > names.size()) { // ensures there always is atleast ONE mafia ^^
 	
@@ -87,29 +88,39 @@ int main() {
 		cout << names[i] << endl;
 	}
 
-
+	
+	//paladins
+	int paladins{1};
 
 	//assign the mafias and players
 	
 	vector<Player*> players{};
 	
 
-	for (int i = 0; i < names.size(); i++) {
-		if (i < numOfMafias) {
-			Mafia *temp = new Mafia{};
-			temp->name = names[i];
-			players.push_back(temp);
-		}
-		else if (i < 1 + numOfMafias) {
-			Paladin* temp = new Paladin{};
-			temp->name = names[i];
-			players.push_back(temp);
-		}
-		else {
-			Human* temp = new Human{};
-			temp->name = names[i];
-			players.push_back(temp);
-		}
+	int bigN{};
+
+	//assign mafias
+	for (int i = 0; i < numOfMafias; i++) {
+		Mafia* temp = new Mafia{};
+		temp->name = names[bigN];
+		players.push_back(temp);
+		bigN++;
+	}
+
+	//assign paladins
+	for (int i = 0; i < paladins; i++) {
+		Paladin* temp = new Paladin{};
+		temp->name = names[bigN];
+		players.push_back(temp);
+		bigN++;
+	}
+
+	//assign the rest to humans
+	while (bigN < names.size()) {
+		Human* temp = new Human{};
+		temp->name = names[bigN];
+		players.push_back(temp);
+		bigN++;
 	}
 
 
@@ -146,8 +157,6 @@ void GetPlayerNames(vector<string>& names) {
 
 
 void MainGameLoop(vector<Player*> a_players) {
-
-	
 	while (true) {
 		//night ---------------------
 

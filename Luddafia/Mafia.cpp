@@ -13,7 +13,7 @@ void Mafia::Action(vector<Player*> a_players) {
 		if (act == 0) {
 			vector<string> playerNames{};
 			for (int i = 0; i < a_players.size(); i++) {
-				playerNames.push_back(a_players[i]->name);
+				playerNames.push_back(a_players[i]->name + "   " + a_players[i]->GetType());
 			}
 
 			act = Choice(playerNames, name);
