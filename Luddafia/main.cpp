@@ -196,11 +196,7 @@ void MainGameLoop(vector<Player*> a_players) {
 		if (act < names.size() - 1) {
 			a_players.erase(a_players.begin() + act);
 		}
-
-
 	}
-
-	
 }
 
 
