@@ -9,7 +9,6 @@
 #include "Mafia.h"
 #include "Paladin.h"
 
-//using namespace test;
 
 using std::cout;
 using std::endl;

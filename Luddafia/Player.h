@@ -24,7 +24,7 @@ public:
 	bool isAlive = true;
 	bool isProtected = false;
 	bool attemptedMurder = false;
-
+	
 	std::string virtual GetType();
 
 	void virtual Action(vector<Player*>);
