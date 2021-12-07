@@ -19,6 +19,9 @@
     <Filter Include="Header Files\playerCPP">
       <UniqueIdentifier>{d93cd92a-973e-4d4b-8391-46e5224be8ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CmdManip">
+      <UniqueIdentifier>{8b57a6b1-1ea5-415b-8800-7be7452f7f72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

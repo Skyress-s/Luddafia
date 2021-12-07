@@ -104,9 +104,7 @@ vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes, vector<st
 		//draws total number and number needed
 		cout << endl;
 
-
 		int totalNeeded = names.size();
-
 		int currentTotal{};
 		for (int i = 0; i < amount.size(); i++) {
 			currentTotal += amount[i];
@@ -119,34 +117,28 @@ vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes, vector<st
 		//input and
 		char act = _getch();
 
-
 		switch (tolower(act)) {
 		case 'a':
 			amount[currentChoice]--;
-			if (amount[currentChoice] < 0) {
+			if (amount[currentChoice] < 0) 
 				amount[currentChoice] = 0;
-			}
 			break;
 		case 'd':
 			amount[currentChoice]++;
 			break;
 		case 'w':
 			currentChoice--;
-			if (currentChoice < 0) {
+			if (currentChoice < 0) 
 				currentChoice = classes.size() - 1;
-			}
 			break;
 		case 's':
 			currentChoice++;
-			if (currentChoice > classes.size() - 1) {
+			if (currentChoice > classes.size() - 1) 
 				currentChoice = 0;
-			}
 			break;
 		case ' ':
-			if (totalNeeded == currentTotal) {
+			if (totalNeeded == currentTotal) 
 				finished = true;
-			}
-
 			break;
 		default:
 			break;

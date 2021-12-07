@@ -18,10 +18,8 @@ void Mafia::Action(vector<Player*> a_players) {
 		vector<string> list{ "Kill", "Skip" };
 		int act = Choice(list, "Mafias turn");
 		if (act == 0) {
-			vector<string> playerNames{};
-			for (int i = 0; i < a_players.size(); i++) {
-				playerNames.push_back(a_players[i]->name + "   " + a_players[i]->GetType());
-			}
+			vector<string> playerNames = getPlayerNames(a_players, true);
+			
 
 			act = Choice(playerNames, "Whom to kill ?");
 			a_players[act]->attemptedMurder = true;
