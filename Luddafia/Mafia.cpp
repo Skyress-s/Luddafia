@@ -23,7 +23,7 @@ void Mafia::Action(vector<Player*> a_players) {
 				playerNames.push_back(a_players[i]->name + "   " + a_players[i]->GetType());
 			}
 
-			act = Choice(playerNames, name);
+			act = Choice(playerNames, "Whom to kill ?");
 			a_players[act]->attemptedMurder = true;
 		}
 	}

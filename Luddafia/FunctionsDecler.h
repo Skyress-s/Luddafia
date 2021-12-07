@@ -26,4 +26,4 @@ void MainGameLoop(vector<Player*>);
 void DisplayPlayerStatuses(vector<Player*>);
 vector<int> CreateRandomIndexArray(int size);
 vector<string> MixNameVector(vector<string> a_names);
-vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes);
+vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes, vector<string> names);

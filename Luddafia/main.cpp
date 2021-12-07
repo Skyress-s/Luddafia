@@ -19,7 +19,7 @@ int main() {
 		new Sheriff()
 	};
 	
-	vector<std::pair<Player*, int>> amount = chooseClasses(classes);
+	vector<std::pair<Player*, int>> amount = chooseClasses(classes, names);
 
 
 	//mixes the names randomly
@@ -83,9 +83,8 @@ vector<string> MixNameVector(vector<string> a_names) {
 	return result;
 }
 
-vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes) {
+vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes, vector<string> names) {
 	vector<int> amount(classes.size(), 0);
-
 
 	bool finished{ false };
 	int currentChoice{};
@@ -94,15 +93,30 @@ vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes) {
 		system("cls");
 		for (int i = 0; i < classes.size(); i++) {
 			if (i == currentChoice) {
-				cout << "  -> ";
+				cout << " ->  ";
 			}
 			else {
-				cout << "   ";
+				cout << "    ";
 			}
 
 			cout << amount[i] << "   " << classes[i]->GetType() << endl;
 		}
+		//draws total number and number needed
+		cout << endl;
 
+
+		int totalNeeded = names.size();
+
+		int currentTotal{};
+		for (int i = 0; i < amount.size(); i++) {
+			currentTotal += amount[i];
+		}
+		cout << "current           : " << currentTotal << endl;
+		cout << "total needed      : " << totalNeeded << endl;
+
+
+
+		//input and
 		char act = _getch();
 
 
@@ -129,7 +143,10 @@ vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes) {
 			}
 			break;
 		case ' ':
-			finished = true;
+			if (totalNeeded == currentTotal) {
+				finished = true;
+			}
+
 			break;
 		default:
 			break;
