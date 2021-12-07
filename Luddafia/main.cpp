@@ -1,27 +1,64 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <random>
-#include <ctime>
-
-#include "Player.h"
-#include "Human.h"
-#include "Mafia.h"
-#include "Paladin.h"
-
-
-using std::cout;
-using std::endl;
-using std::cin;
-using std::string;
-using std::vector;
+#include "FunctionsDecler.h"
 
 std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
-bool Mafia::hasActed = false;
+
+bool Mafia::hasActed = false;		//have to init the static variable here, outside the class
 
 
-void CinClear();
-int GetRandomNum(int, int);
+// definitions
+int main() {
+	
+	//the name of the players
+	vector<string> names{};
+	GetPlayerNames(names);
+
+	vector<Player*> classes{
+		new Human(),
+		new Mafia(),
+		new Paladin(),
+		new Sheriff()
+	};
+	
+	vector<std::pair<Player*, int>> amount = chooseClasses(classes);
+	
+
+	//how many of each type
+	// DO THIS IN TERMINAL LATER
+	/*vector<std::pair<Player*, int>> amount{
+		std::pair<Player*, int>(new Paladin(), 1),
+		std::pair<Player*, int>(new Mafia(), 2),
+		std::pair<Player*, int>(new Human(), 1),
+		std::pair<Player*, int>(new Sheriff(), 1)
+
+	};*/
+
+
+	//mixes the names randomly
+	names = MixNameVector(names);
+
+	//players vector
+	vector<Player*> players{};
+
+	//inserts the roles to players
+	for (int i = 0; i < amount.size(); i++) {
+
+		//goes the right amoundt og times for <player*, INT>
+		for (int j = 0; j < amount[i].second; j++) {
+			Player* temp = amount[i].first->MakeThisClass();
+			players.push_back(temp);
+		}
+	}
+
+	//inserts the names
+	for (int i = 0; i < players.size(); i++) {
+		players[i]->name = names[i];
+	}
+
+	//plays the game
+	MainGameLoop(players);
+	return 0;
+}
+
 vector<int> CreateRandomIndexArray(int size) {
 	//creates the linear array
 	vector<int> larr{};
@@ -45,6 +82,7 @@ vector<int> CreateRandomIndexArray(int size) {
 
 	return mixedIndexes;
 }
+
 vector<string> MixNameVector(vector<string> a_names) {
 
 	vector<int> mixedIndexes = CreateRandomIndexArray(a_names.size());
@@ -55,145 +93,70 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 	return result;
 }
-void GetPlayerNames(vector<string>&);
-void MainGameLoop(vector<Player*>);
-void DisplayPlayerStatuses(vector<Player*>);
+
+vector<std::pair<Player*, int>> chooseClasses(vector<Player*> classes) {
+	vector<int> amount(classes.size(), 0);
 
 
-// definitions
-int main() {
-	
-	vector<std::pair<Player*, int>> amout{
-		std::pair<Player*, int>(new Paladin(), 4),
-		std::pair<Player*, int>(new Mafia(), 4)
-	};
+	bool finished{ false };
+	int currentChoice{};
+	while (!finished) {
+		//draws
+		system("cls");
+		for (int i = 0; i < classes.size(); i++) {
+			if (i == currentChoice) {
+				cout << "  -> ";
+			}
+			else {
+				cout << "   ";
+			}
 
-
-
-	
-	Player* test = new Player();
-	test = dynamic_cast<Player*>(amout[1].first);
-
-	cout << test->GetType() << endl;
-	cout << amout[0].first->GetType() << endl << endl;
-
-	cout << &amout[1].first << endl;
-	cout << &test << endl;
-
-
-	return 0;
-	
-	//the name of the players
-	vector<string> names{};
-	GetPlayerNames(names);
-
-	//how many of each type
-	// DO THIS IN TERMINAL LATER
-	vector<std::pair<Player*, int>> amoundt{
-		std::pair<Player*, int>(new Paladin(), 4),
-		std::pair<Player*, int>(new Mafia(), 4)
-	};
-
-	
-	//mixes the names randomly
-	names = MixNameVector(names);
-	
-	//players vector
-	vector<Player*> playerss{};
-
-	//inserts the roles to players
-	for (int i = 0; i < amoundt.size(); i++) {
-		
-		//goes the right amoundt og times for <player*, INT>
-		for (int j = 0; j < amoundt[i].second; j++) {
-			Player* temp = new Player();
-			
-			temp = dynamic_cast<Player*>(amoundt[i].first);
-			
-			playerss.push_back(temp);
-			//delete(temp);
+			cout << amount[i] << "   " << classes[i]->GetType() << endl;
 		}
 
+		char act = _getch();
+
+
+		switch (tolower(act)) {
+		case 'a':
+			amount[currentChoice]--;
+			if (amount[currentChoice] < 0) {
+				amount[currentChoice] = 0;
+			}
+			break;
+		case 'd':
+			amount[currentChoice]++;
+			break;
+		case 'w':
+			currentChoice--;
+			if (currentChoice < 0) {
+				currentChoice = classes.size() - 1;
+			}
+			break;
+		case 's':
+			currentChoice++;
+			if (currentChoice > classes.size() - 1) {
+				currentChoice = 0;
+			}
+			break;
+		case ' ':
+			finished = true;
+			break;
+		default:
+			break;
+		}
 	}
 
-	//inserts the names
-	for (int i = 0; i < playerss.size(); i++) {
-		playerss[i]->name = names[i];
-		//cout << names[i] << endl;
+	//creates the vector of the player types and the amound
+	vector<std::pair<Player*, int>> output{};
+	for (int i = 0; i < classes.size(); i++) {
+		if (amount[i] > 0) {
+			output.push_back(std::pair<Player*, int>(classes[i], amount[i]) );
+		}
 	}
 
-	for (int i = 0; i < playerss.size(); i++) {
-		cout << playerss[i]->name << "   " << playerss[i]->GetType() << "     " << &playerss[i] << endl;
-	}
-
-
-	return 0;
-	//determines how many mafias
-
-	
-	int personsPerMafia = 3; // 3 manes three persons per ONE mafia
-	if (personsPerMafia > names.size()) { // ensures there always is atleast ONE mafia ^^
-	
-		personsPerMafia = names.size();
-	}
-
-	
-	cout << endl;
-	int numOfMafias = floor((float(names.size()) / (personsPerMafia + 1)));
-	cout << "Num of mafias : " << numOfMafias << endl << endl;
-
-	//mixes the names randomly
-	names = MixNameVector(names);
-
-	for (int i = 0; i < names.size(); i++) {
-		cout << names[i] << endl;
-	}
-
-	
-	//paladins
-	int paladins{1};
-
-	//assign the mafias and players
-	
-	vector<Player*> players{};
-	
-
-	int bigN{};
-
-	//assign mafias
-	for (int i = 0; i < numOfMafias; i++) {
-		Mafia* temp = new Mafia{};
-		temp->name = names[bigN];
-		players.push_back(temp);
-		bigN++;
-	}
-
-	//assign paladins
-	for (int i = 0; i < paladins; i++) {
-		Paladin* temp = new Paladin{};
-		temp->name = names[bigN];
-		players.push_back(temp);
-		bigN++;
-	}
-
-	//assign the rest to humans
-	while (bigN < names.size()) {
-		Human* temp = new Human{};
-		temp->name = names[bigN];
-		players.push_back(temp);
-		bigN++;
-	}
-
-
-	
-
-	MainGameLoop(players);
-	
-
-
-	return 0;
+	return output;
 }
-
 
 void GetPlayerNames(vector<string>& names) {
 	bool accepted = false;
@@ -216,7 +179,6 @@ void GetPlayerNames(vector<string>& names) {
 	}
 }
 
-
 void MainGameLoop(vector<Player*> a_players) {
 	while (true) {
 		//night ---------------------
@@ -229,9 +191,9 @@ void MainGameLoop(vector<Player*> a_players) {
 		//resolve actions
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResolveActions();
-			
 		}
 
+		Mafia::hasActed = false;
 		//reset relevant variables
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResentRelevantVariables();
@@ -247,19 +209,22 @@ void MainGameLoop(vector<Player*> a_players) {
 		}
 
 		//VOTE --------------------------------------
-		vector<string> names{};
-		for (int i = 0; i < a_players.size(); i++) {
-			names.push_back(a_players[i]->name);
-		}
-		names.push_back("No Consensus");
-
-		int act = Choice(names, "Whom to vote to the noose ? ");
-		if (act < names.size() - 1) {
-			a_players.erase(a_players.begin() + act);
-		}
+		dayVote(a_players);
 	}
 }
 
+void dayVote(vector<Player*>& a_players) {
+	vector<string> names{};
+	for (int i = 0; i < a_players.size(); i++) {
+		names.push_back(a_players[i]->name);
+	}
+	names.push_back("No Consensus");
+
+	int act = Choice(names, "Whom to vote to the noose ? ");
+	if (act < names.size() - 1) {
+		a_players.erase(a_players.begin() + act);
+	}
+}
 
 void CinClear() {
 	std::cin.clear(); // clears the cin buffer for errors
@@ -288,16 +253,15 @@ void DisplayPlayerStatuses(vector<Player*> a_players) {
 	for (int i = 0; i < a_players.size(); i++) {
 		string line{};
 		line += a_players[i]->GetType();
-		line += Spacing(12 - line.size());
 
+		line += Spacing(12 - line.size());
+		line += "name : ";
 		line += a_players[i]->name;
 
 		line += Spacing(20 - line.size());
 
-		line += "Killed! : " + std::to_string(!a_players[i]->isAlive);
+		line += "Alive : " + std::to_string(!a_players[i]->isAlive);
 
-		
-		
 		cout << line << endl;
 	}
 	system("pause");

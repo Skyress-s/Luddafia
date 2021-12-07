@@ -36,6 +36,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Header Files\playerCPP</Filter>
     </ClCompile>
+    <ClCompile Include="FunctionsDecler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheriff.cpp">
+      <Filter>Header Files\playerCPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FunctionsDecler.h">
@@ -51,6 +57,9 @@
       <Filter>Header Files\playersH</Filter>
     </ClInclude>
     <ClInclude Include="Human.h">
+      <Filter>Header Files\playersH</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheriff.h">
       <Filter>Header Files\playersH</Filter>
     </ClInclude>
   </ItemGroup>

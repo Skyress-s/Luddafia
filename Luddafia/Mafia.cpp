@@ -3,15 +3,17 @@
 
 Mafia::Mafia() {
 	//Mafia::hasActed = false;
+	bad = true;
 }
 
 std::string Mafia::GetType() {
 	return "Mafia";
+	
 }
 
 
 void Mafia::Action(vector<Player*> a_players) {
-	if (Mafia::hasActed == false/*a_players[0]->name == name*/) { // this requires that the first element of the players vector is always a mafia
+	if (Mafia::hasActed == false) {
 		Mafia::hasActed = true;
 		vector<string> list{ "Kill", "Skip" };
 		int act = Choice(list, "Mafias turn");
@@ -25,4 +27,8 @@ void Mafia::Action(vector<Player*> a_players) {
 			a_players[act]->attemptedMurder = true;
 		}
 	}
+}
+
+Player* Mafia::MakeThisClass() {
+	return new Mafia();
 }

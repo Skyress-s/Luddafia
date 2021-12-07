@@ -8,7 +8,12 @@ void Player::Action(vector<Player*> a_players) {
 	std::cout << "This i a N/A, PLAYER" << std::endl;
 }
 
+Player* Player::MakeThisClass() {
+	return new Player();
+}
+
 void Player::ResolveActions() {
+	
 	if (attemptedMurder == true && isProtected == true) {
 		isAlive = true;
 	}
@@ -21,6 +26,20 @@ void Player::ResentRelevantVariables() {
 	isProtected = false;
 	attemptedMurder = false;
 
+}
+
+vector<string> Player::getPlayerNames(vector<Player*> players, bool withClassTypes) {
+	vector<string> names{};
+	for (int i = 0; i < players.size(); i++) {
+		string name{};
+		name += players[i]->name;
+		if (withClassTypes) {
+			name += "  " + players[i]->GetType();
+		}
+
+		names.push_back(name);
+	}
+	return names;
 }
 
 

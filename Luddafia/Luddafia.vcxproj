@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FunctionsDecler.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Mafia.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paladin.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Sheriff.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FunctionsDecler.h" />
@@ -151,6 +153,7 @@
     <ClInclude Include="Mafia.h" />
     <ClInclude Include="Paladin.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Sheriff.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

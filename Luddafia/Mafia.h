@@ -9,5 +9,6 @@ public:
 	static bool hasActed;
 	std::string GetType() override;
 	void Action(vector<Player*>) override;
+	Player* MakeThisClass() override;
 };
 

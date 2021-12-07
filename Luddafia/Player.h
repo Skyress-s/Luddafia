@@ -24,14 +24,14 @@ public:
 	bool isAlive = true;
 	bool isProtected = false;
 	bool attemptedMurder = false;
+	bool bad = false;
 	
-	std::string virtual GetType();
-
-	void virtual Action(vector<Player*>);
-
+	virtual std::string GetType();
+	virtual void Action(vector<Player*>);
+	virtual Player* MakeThisClass();
 	void ResolveActions();
-	
 	void ResentRelevantVariables();
+	vector<string> getPlayerNames(vector<Player*> players, bool withClassTypes);
 
 };
 

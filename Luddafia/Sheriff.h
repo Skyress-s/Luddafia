@@ -1,13 +1,15 @@
 #pragma once
 #include "Player.h"
-
-#include <iostream>
-class Human : public Player {
+class Sheriff : public Player {
 public:
-	Human() {}
+	Sheriff();
 
 	std::string GetType() override;
 	void Action(vector<Player*>) override;
 	Player* MakeThisClass() override;
+
+
+private:
+
 };
 
