@@ -4,8 +4,9 @@
 #include <iostream>
 class Mafia : public Player {
 public:
-	Mafia() {}
+	Mafia();
 
+	static bool hasActed;
 	std::string GetType() override;
 	void Action(vector<Player*>) override;
 };

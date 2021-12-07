@@ -17,9 +17,10 @@ using std::string;
 using std::vector;
 
 std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
+bool Mafia::hasActed = false;
+
 
 void CinClear();
-
 int GetRandomNum(int, int);
 vector<int> CreateRandomIndexArray(int size) {
 	//creates the linear array
@@ -54,18 +55,66 @@ vector<string> MixNameVector(vector<string> a_names) {
 
 	return result;
 }
-
 void GetPlayerNames(vector<string>&);
 void MainGameLoop(vector<Player*>);
-
 void DisplayPlayerStatuses(vector<Player*>);
 
-int main() {
 
+// definitions
+int main() {
+	Player* original = new Mafia();
+
+	Player* help = new Player();
+
+	help = dynamic_cast<Mafia*>(original);
+
+	cout << help->GetType();
+
+
+	return 0;
+	
 	//the name of the players
 	vector<string> names{};
 	GetPlayerNames(names);
 
+	//how many of each type
+	// DO THIS IN TERMINAL LATER
+	vector<std::pair<Player*, int>> amoundt{
+		std::pair<Player*, int>(new Paladin(), 4),
+		std::pair<Player*, int>(new Mafia(), 4)
+	};
+
+	
+	//mixes the names randomly
+	names = MixNameVector(names);
+	
+	//players vector
+	vector<Player*> playerss{};
+
+	//inserts the roles to players
+	for (int i = 0; i < amoundt.size(); i++) {
+		
+		//goes the right amoundt og times for <player*, INT>
+		for (int j = 0; j < amoundt[i].second; j++) {
+			Player* temp = amoundt[i].first;
+			playerss.push_back(temp);
+			//delete(temp);
+		}
+
+	}
+
+	//inserts the names
+	for (int i = 0; i < playerss.size(); i++) {
+		playerss[i]->name = names[i];
+		//cout << names[i] << endl;
+	}
+
+	for (int i = 0; i < playerss.size(); i++) {
+		cout << playerss[i]->name << "   " << playerss[i]->GetType() << endl;
+	}
+
+
+	return 0;
 	//determines how many mafias
 
 	

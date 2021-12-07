@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Class.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Mafia.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,8 +146,6 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Class.h" />
-    <ClInclude Include="classes.h" />
     <ClInclude Include="FunctionsDecler.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Mafia.h" />
