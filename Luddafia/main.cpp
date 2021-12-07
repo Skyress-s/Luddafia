@@ -20,17 +20,6 @@ int main() {
 	};
 	
 	vector<std::pair<Player*, int>> amount = chooseClasses(classes);
-	
-
-	//how many of each type
-	// DO THIS IN TERMINAL LATER
-	/*vector<std::pair<Player*, int>> amount{
-		std::pair<Player*, int>(new Paladin(), 1),
-		std::pair<Player*, int>(new Mafia(), 2),
-		std::pair<Player*, int>(new Human(), 1),
-		std::pair<Player*, int>(new Sheriff(), 1)
-
-	};*/
 
 
 	//mixes the names randomly
