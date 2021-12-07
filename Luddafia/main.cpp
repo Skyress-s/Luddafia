@@ -62,13 +62,23 @@ void DisplayPlayerStatuses(vector<Player*>);
 
 // definitions
 int main() {
-	Player* original = new Mafia();
+	
+	vector<std::pair<Player*, int>> amout{
+		std::pair<Player*, int>(new Paladin(), 4),
+		std::pair<Player*, int>(new Mafia(), 4)
+	};
 
-	Player* help = new Player();
 
-	help = dynamic_cast<Mafia*>(original);
 
-	cout << help->GetType();
+	
+	Player* test = new Player();
+	test = dynamic_cast<Player*>(amout[1].first);
+
+	cout << test->GetType() << endl;
+	cout << amout[0].first->GetType() << endl << endl;
+
+	cout << &amout[1].first << endl;
+	cout << &test << endl;
 
 
 	return 0;
@@ -96,7 +106,10 @@ int main() {
 		
 		//goes the right amoundt og times for <player*, INT>
 		for (int j = 0; j < amoundt[i].second; j++) {
-			Player* temp = amoundt[i].first;
+			Player* temp = new Player();
+			
+			temp = dynamic_cast<Player*>(amoundt[i].first);
+			
 			playerss.push_back(temp);
 			//delete(temp);
 		}
@@ -110,7 +123,7 @@ int main() {
 	}
 
 	for (int i = 0; i < playerss.size(); i++) {
-		cout << playerss[i]->name << "   " << playerss[i]->GetType() << endl;
+		cout << playerss[i]->name << "   " << playerss[i]->GetType() << "     " << &playerss[i] << endl;
 	}
 
 
