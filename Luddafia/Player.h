@@ -14,6 +14,7 @@ using std::cin;
 using std::endl;
 
 int Choice(vector<string>, string);
+string Spacing(int space, string input);
 
 class Player {
 public:
@@ -32,6 +33,7 @@ public:
 	void ResolveActions();
 	void ResentRelevantVariables();
 	vector<string> getPlayerNames(vector<Player*> players, bool withClassTypes);
+	
 
 };
 

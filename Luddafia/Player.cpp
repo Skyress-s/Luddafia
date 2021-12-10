@@ -28,19 +28,44 @@ void Player::ResentRelevantVariables() {
 
 }
 
+string Spacing(int space, string input) {
+
+	string output{};
+	const int n = space - input.size();
+
+	for (int i = 0; i < n; i++) {
+		output += ' ';
+	}
+	return output;
+}
+
+void Spacing2(int space, string& input) {
+	string output{};
+	const int n = space - input.size();
+
+	for (int i = 0; i < n; i++) {
+		output += ' ';
+	}
+
+	input += space;
+	return;
+}
+
 vector<string> Player::getPlayerNames(vector<Player*> players, bool withClassTypes) {
 	vector<string> names{};
 	for (int i = 0; i < players.size(); i++) {
 		string name{};
 		name += players[i]->name;
 		if (withClassTypes) {
-			name += "  " + players[i]->GetType();
+			//name += "  " + players[i]->GetType();
+			name += Spacing(12, name) + players[i]->GetType();
 		}
 
 		names.push_back(name);
 	}
 	return names;
 }
+
 
 
 //some functions most of the subclasses use :)
@@ -58,8 +83,11 @@ int Choice(vector<string> options, string title) {
 			else {
 				cout << "    ";
 			}
-			cout /* << "Option "*/ << options[i] << endl;
 
+			cout /* << "Option "*/ << options[i] << endl;
+			/*string s{};
+			s = Spacing(40, options[i]);
+			cout << s  << options[i] << endl;*/
 		}
 
 		char input = _getch();
@@ -93,4 +121,7 @@ int Choice(vector<string> options, string title) {
 
 	return currentChoice;
 }
+
+
+
 

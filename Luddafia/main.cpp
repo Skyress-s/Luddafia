@@ -191,13 +191,15 @@ void MainGameLoop(vector<Player*> a_players) {
 			a_players[i]->ResolveActions();
 		}
 
-		Mafia::hasActed = false;
+		DisplayPlayerStatuses(a_players);
+
+
 		//reset relevant variables
+		Mafia::hasActed = false;
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResentRelevantVariables();
 		}
 
-		DisplayPlayerStatuses(a_players);
 
 		// Remove dead players
 		for (size_t i = 0; i < a_players.size(); i++) {
@@ -235,32 +237,34 @@ int GetRandomNum(int from, int too) {
 	return die(mersenne);
 }
 
-string Spacing(int space) {
-	string output{};
-	for (int i = 0; i < space; i++) {
-		output += " ";
-
-	}
-	//cout << output << "t" << endl;
-
-	return output;
-}
-
 void DisplayPlayerStatuses(vector<Player*> a_players) {
 	system("cls");
+	for (int i = 0; i < a_players.size(); i++) {
+		if (a_players[i]->attemptedMurder && a_players[i]->isProtected) {
+			cout << a_players[i]->name << " Got a bad visit, but was saved by a Paladin!" << endl;
+		}
+		else if (a_players[i]->attemptedMurder && !a_players[i]->isProtected) {
+			cout << a_players[i]->name << " Got a bad visit, and got murdered" << endl;
+		}
+	}
+	system("pause");
+
+	/*system("cls");
 	for (int i = 0; i < a_players.size(); i++) {
 		string line{};
 		line += a_players[i]->GetType();
 
-		line += Spacing(12 - line.size());
+		line += Spacing(12, line);
 		line += "name : ";
 		line += a_players[i]->name;
 
-		line += Spacing(20 - line.size());
+		line += Spacing(20, line);
 
 		line += "Alive : " + std::to_string(!a_players[i]->isAlive);
 
 		cout << line << endl;
 	}
-	system("pause");
+	system("pause");*/
+
+	//new version
 }
