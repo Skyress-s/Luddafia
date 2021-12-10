@@ -13,6 +13,7 @@ void Paladin::Action(vector<Player*> a_players) {
 		act = Choice(names, "Who Will " + name + " Protect ? ");
 
 		a_players[act]->isProtected = true;
+		//a_players[act]->log.push_back(name + " Protected " + a_players[act]->name);
 	}
 }
 

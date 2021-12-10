@@ -33,8 +33,8 @@ public:
 	void ResolveActions();
 	void ResentRelevantVariables();
 	vector<string> getPlayerNames(vector<Player*> players, bool withClassTypes);
-	
 
+	vector<string>log{};
 };
 
 
