@@ -5,6 +5,11 @@ std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)
 bool Mafia::hasActed = false;		//have to init the static variable here, outside the class and functions
 
 
+void test() {
+	printf("did something");
+	return;
+}
+
 // definitions
 int main() {
 	
@@ -193,13 +198,11 @@ void MainGameLoop(vector<Player*> a_players) {
 
 		DisplayPlayerStatuses(a_players);
 
-
 		//reset relevant variables
 		Mafia::hasActed = false;
 		for (int i = 0; i < a_players.size(); i++) {
 			a_players[i]->ResentRelevantVariables();
 		}
-
 
 		// Remove dead players
 		for (size_t i = 0; i < a_players.size(); i++) {
@@ -241,7 +244,7 @@ void DisplayPlayerStatuses(vector<Player*> a_players) {
 	system("cls");
 	for (int i = 0; i < a_players.size(); i++) {
 		if (a_players[i]->attemptedMurder && a_players[i]->isProtected) {
-			cout << a_players[i]->name << " Got a bad visit, but was saved by a Paladin!" << endl;
+			cout << a_players[i]->name << " Got a bad visit, but was saved!" << endl;
 		}
 		else if (a_players[i]->attemptedMurder && !a_players[i]->isProtected) {
 			cout << a_players[i]->name << " Got a bad visit, and got murdered" << endl;
